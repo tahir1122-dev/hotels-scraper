@@ -247,16 +247,56 @@ export const WORLDWIDE_CITIES = {
         { name: 'Malé', country: 'Maldives', region: 'asia', priority: 2 },
 
         // 🇵🇰 Pakistan
+
+        // Major Cities (Priority 1)
         { name: 'Karachi', country: 'Pakistan', region: 'asia', priority: 1 },
         { name: 'Lahore', country: 'Pakistan', region: 'asia', priority: 1 },
         { name: 'Islamabad', country: 'Pakistan', region: 'asia', priority: 1 },
+
+        // Big Cities / Popular (Priority 2)
         { name: 'Rawalpindi', country: 'Pakistan', region: 'asia', priority: 2 },
         { name: 'Faisalabad', country: 'Pakistan', region: 'asia', priority: 2 },
-        { name: 'Multan', country: 'Pakistan', region: 'asia', priority: 3 },
-        { name: 'Peshawar', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Multan', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Peshawar', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Gujranwala', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Sialkot', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Hyderabad', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Quetta', country: 'Pakistan', region: 'asia', priority: 2 },
+
+        // Northern Areas / Hill Stations (Priority 2)
         { name: 'Murree', country: 'Pakistan', region: 'asia', priority: 2 },
         { name: 'Hunza', country: 'Pakistan', region: 'asia', priority: 2 },
         { name: 'Skardu', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Gilgit', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Naran', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Kaghan', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Swat', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Kalam', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Chitral', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Fairy Meadows', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Astore', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Shogran', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Neelum Valley', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Arang Kel', country: 'Pakistan', region: 'asia', priority: 2 },
+        { name: 'Ratti Gali', country: 'Pakistan', region: 'asia', priority: 2 },
+
+        // Historical / Cultural / Coastal (Priority 3)
+        { name: 'Taxila', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Thatta', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Mohenjo-daro', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Bahawalpur', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Derawar Fort', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Makran', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Gwadar', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Ormara', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Pasni', country: 'Pakistan', region: 'asia', priority: 3 },
+
+        // Religious / Shrines (Priority 3)
+        { name: 'Nankana Sahib', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Kartarpur', country: 'Pakistan', region: 'asia', priority: 3 },
+        { name: 'Sehwan Sharif', country: 'Pakistan', region: 'asia', priority: 3 },
+
+
 
         // Middle East
         { name: 'Dubai', country: 'United Arab Emirates', region: 'asia', priority: 1 },

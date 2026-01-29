@@ -3,13 +3,17 @@
  * Production-grade scraper with proxy support and anti-detection
  */
 
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-extra';
+import StealthPlugin from 'puppeteer-extra-plugin-stealth';
 import proxyService from '../../services/iproyal-proxy.service.js';
 import { randomDelay, humanDelay } from '../../utils/delay.js';
 import logger from '../../utils/logger.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
+// Add stealth plugin to avoid detection
+puppeteer.use(StealthPlugin());
 
 const PLATFORM = 'booking';
 const BASE_URL = 'https://www.booking.com';
@@ -81,13 +85,20 @@ class BookingScraper {
             '--disable-accelerated-2d-canvas',
             '--disable-gpu',
             '--window-size=1920,1080',
-            '--disable-blink-features=AutomationControlled'
+            '--disable-blink-features=AutomationControlled',
+            '--ignore-certificate-errors',
+            '--ignore-certificate-errors-spki-list'
         ];
 
-        // Add proxy if enabled
+        // Add proxy if enabled - using simple HTTP proxy
         if (proxyService.isEnabled()) {
-            const proxyArgs = proxyService.getPuppeteerArgs(country);
-            args.push(...proxyArgs);
+            const auth = proxyService.getAuthentication(country);
+            const proxyUrl = `http://${auth.username}:${encodeURIComponent(auth.password)}@${proxyService.host}:${proxyService.port}`;
+
+            // Set proxy as environment variable for Chromium
+            process.env.HTTPS_PROXY = proxyUrl;
+            process.env.HTTP_PROXY = proxyUrl;
+
             logger.info(`Booking.com: Using proxy for ${country || 'default'}`);
         }
 
@@ -107,13 +118,10 @@ class BookingScraper {
     async createPage(country = null) {
         this.page = await this.browser.newPage();
 
-        // Authenticate proxy if needed
-        if (proxyService.isEnabled()) {
-            const auth = proxyService.getAuthentication(country);
-            if (auth) {
-                await this.page.authenticate(auth);
-            }
-        }
+        // Set viewport to avoid detection
+        await this.page.setViewport({ width: 1920, height: 1080 });
+
+        // Proxy auth is now handled via environment variables - no need for page.authenticate
 
         // Set user agent
         const userAgents = [
@@ -155,9 +163,12 @@ class BookingScraper {
 
             logger.info(`Booking.com: Navigating to ${searchUrl}`);
 
+            // Add small delay after authenticate to ensure proxy is ready
+            await randomDelay(500, 1000);
+
             await this.page.goto(searchUrl, {
-                waitUntil: 'domcontentloaded',
-                timeout: parseInt(process.env.NAVIGATION_TIMEOUT) || 30000
+                waitUntil: 'networkidle2',
+                timeout: parseInt(process.env.NAVIGATION_TIMEOUT) || 45000
             });
 
             // Handle cookie consent

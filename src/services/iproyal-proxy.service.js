@@ -103,15 +103,28 @@ class ProxyService {
     /**
      * Get proxy configuration for Puppeteer
      * @param {string} country - Target country
-     * @returns {Object} Puppeteer proxy args
+     * @returns {Array} Puppeteer proxy args
      */
     getPuppeteerArgs(country = null) {
         if (!this.isEnabled()) {
             return [];
         }
 
-        const proxyUrl = this.getProxyUrl(country);
-        return [`--proxy-server=${this.host}:${this.port}`];
+        // Return proxy server without auth - auth will be set via setRequestInterception
+        return [`--proxy-server=http://${this.host}:${this.port}`];
+    }
+
+    /**
+     * Get proxy URL with authentication for request interception
+     * @param {string} country - Target country
+     * @returns {string} Full proxy URL with auth
+     */
+    getProxyUrlWithAuth(country = null) {
+        if (!this.isEnabled()) {
+            return null;
+        }
+
+        return this.getProxyUrl(country);
     }
 
     /**

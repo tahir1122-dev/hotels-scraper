@@ -76,6 +76,10 @@ class AgodaScraper {
     async createPage(country = null) {
         this.page = await this.browser.newPage();
 
+        // Set viewport to avoid detection
+        await this.page.setViewport({ width: 1920, height: 1080 });
+
+        // Authenticate proxy if needed (must be done before any navigation)
         if (proxyService.isEnabled()) {
             const auth = proxyService.getAuthentication(country);
             if (auth) {
